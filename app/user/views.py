@@ -88,7 +88,7 @@ class AuthViewsets(viewsets.GenericViewSet):
         return Response({"success": True, "message": "Acount Verification Successful"}, status=200)
     
 class PasswordChangeView(viewsets.GenericViewSet):
-    '''Allows password change to authenticated user.'''
+    """Allows password change to authenticated user."""
     serializer_class = PasswordChangeSerializer
     permission_classes = [IsAuthenticated]
 
@@ -103,7 +103,6 @@ class PasswordChangeView(viewsets.GenericViewSet):
 
 class CreateTokenView(ObtainAuthToken):
     """Create a new auth token for user"""
-
     serializer_class = AuthTokenSerializer
     renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
 
