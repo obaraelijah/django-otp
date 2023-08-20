@@ -87,3 +87,15 @@ class AuthViewsets(viewsets.GenericViewSet):
         serializer.save()
         return Response({"success": True, "message": "Acount Verification Successful"}, status=200)
     
+class PasswordChangeView(viewsets.GenericViewSet):
+    '''Allows password change to authenticated user.'''
+    serializer_class = PasswordChangeSerializer
+    permission_classes = [IsAuthenticated]
+
+    def create(self, request, *args, **kwargs):
+        context = {"request": request}
+        serializer = self.get_serializer(data=request.data, context=context)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"message": "Your password has been updated."}, status.HTTP_200_OK)
+    
