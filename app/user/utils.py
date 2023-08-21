@@ -45,7 +45,7 @@ def send_sms(message:str, phone:str):
 
 def clean_phone(number:str):
         """Validates number start with +254 or 0, then 10 digits"""
-        number_pattern = re.compile(r'^(?:\+234|0)\d{10}$')
+        number_pattern = re.compile(r'^(?:\+254|0)\d{10}$')
         result = number_pattern.match(number)
         if result:
             if number.startswith('0'): 
