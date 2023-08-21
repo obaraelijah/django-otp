@@ -120,3 +120,69 @@ class CreateTokenView(ObtainAuthToken):
             )
         except Exception as e:
             return Response({"message": str(e)}, 500)
+        
+class UserViewsets(viewsets.ModelViewSet):
+    queryset = get_user_model().objects.all()
+    serializer_class = ListUserSerializer
+    permission_classes = [IsAuthenticated]
+    http_method_names = ["get", "post", "patch", "delete"]
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    ]
+    filterset_class = UserFilter
+    search_fields = ["email", "firstname", "lastname", "phone"]
+    ordering_fields = [
+        "created_at",
+        "email",
+        "firstname",
+        "lastname",
+        "phone",
+    ]
+
+    def get_queryset(self):
+        user: User = self.request.user
+        if is_admin_user(user):
+            return super().get_queryset().all()
+        return super().get_queryset().filter(id=user.id)
+
+    def get_serializer_class(self):
+        if self.action == "create":
+            return OnboardUserSerializer
+        if self.action in ["partial_update", "update"]:
+            return UpdateUserSerializer
+        return super().get_serializer_class()
+
+    def get_permissions(self):
+        permission_classes = self.permission_classes
+        if self.action in ["create"]:
+            permission_classes = [AllowAny]
+        elif self.action in ["list", "retrieve", "partial_update", "update"]:
+            permission_classes = [IsAuthenticated]
+        elif self.action in ["destroy"]:
+            permission_classes = [IsAdmin]
+        return [permission() for permission in permission_classes]
+    
+
+    @extend_schema(
+        responses={
+            200: inline_serializer(
+                name='VerificationStatus',
+                fields={
+                    "success": serializers.BooleanField(default=True),
+                    "message": serializers.CharField(default="OTP sent for verification!")
+                }
+            ),
+        },
+        description="Sign up with a valid phone number. i.e. 01130303030 or +2548130303030"
+    )
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"success": True, "message": "OTP sent for verification!"}, status=200)
+
+    def list(self, request, *args, **kwargs):
+        "Retrieve user lists based on assigned role"
+        return super().list(request, *args, **kwargs)
