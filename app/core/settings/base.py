@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 WSGI_APPLICATION = "core.wsgi.application"
 ASGI_APPLICATION = "core.asgi.application"
 CORS_ALLOW_ALL_ORIGINS = True
-CSRF_TRUSTED_ORIGINS = ['*']
+CSRF_TRUSTED_ORIGINS = ["https://*.ridwanray.com"]
 LOGIN_URL = "rest_framework:login"
 LOGOUT_URL = "rest_framework:logout"
 
@@ -160,7 +160,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-TIME_ZONE = "Africa/Nairobi"
+TIME_ZONE = "Africa/Lagos"
 DATE_INPUT_FORMATS = [
     "%d/%m/%Y",
     "%d/%m/%y",  # '10/02/2020', '10/02/20'
