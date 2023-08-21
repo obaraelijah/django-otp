@@ -28,3 +28,7 @@ class TokenFactory(factory.django.DjangoModelFactory):
         model = Token
     token = fake.md5()
 
+class TokenFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Token
+    token = 1234
