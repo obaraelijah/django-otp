@@ -7,7 +7,7 @@
 </p>
 
 👋This app shows how to handle mobile phone authentication and verification for a user management solution. <br>
-
+Complete guide: [Click here](https://medium.com/aws-tip/implementing-mobile-number-verification-and-otp-based-authentication-in-django-django-rest-48c54382e989)
 ## Tools & Services:
 - Django & DRF : for building the APIs
 - Docker & Docker compose: Containerization
