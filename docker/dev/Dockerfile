@@ -20,10 +20,10 @@ RUN pip install --upgrade pip
 RUN pip install -r ./requirements/dev.txt
 
 # Copy entrypoint.sh
-COPY ./docker/dev/entrypoint.sh /entrypoint.sh
+COPY ./docker/dev/entrypoint /entrypoint
 
-RUN chmod +x /entrypoint.sh
+RUN chmod +x /entrypoint
 
 COPY ./app /app
 
-ENTRYPOINT [ "/entrypoint.sh" ]
+ENTRYPOINT [ "/entrypoint" ]
