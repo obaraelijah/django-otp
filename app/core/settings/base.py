@@ -240,7 +240,7 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'Django DRF & OTP verification',
     'VERSION': '0.2.0',
     'LICENCE': {'name': 'BSD License'},
-    'CONTACT': {'name': 'Ridwanray', 'email': 'alabarise@gmail.com'},
+    'CONTACT': {'name': 'Elijah', 'email': 'elijahobara357@gmail.com'},
     #OAUTH2 SPEC
     'OAUTH2_FLOWS': [],
     'OAUTH2_AUTHORIZATION_URL': None,
